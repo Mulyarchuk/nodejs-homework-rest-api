@@ -5,6 +5,9 @@ const router = express.Router();
 
 const schemas = require("../../models/contact");
 const {validateBody} = require("../../decorators");
+const {authenticate} = require("../../middlewares");
+
+router.use(authenticate);
 
 router.get('/', contactsController.listContacts);
 
