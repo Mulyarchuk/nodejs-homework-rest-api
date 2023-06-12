@@ -20,7 +20,14 @@ const userSchema = new Schema (
         },
         token: String,
         avatarURL: String, 
-        
+        verify: {
+          type: Boolean,
+          default: false,
+        },
+        verificationCode: {
+          type: String,
+          required: [true, "Verify Code is required"],
+        },
       }
 );
 
@@ -31,14 +38,19 @@ const registerSchema = Joi.object({
     email: Joi.string().email().required(),
   });
 
-  const loginSchema = Joi.object({
+const loginSchema = Joi.object({
     password: Joi.string().required(),
     email: Joi.string().email().required(),
+  });
+
+const emailSchema = Joi.object({
+    email: Joi.string().required(),
   });
 
 const schemas = {
     registerSchema,
     loginSchema,
+    emailSchema,
 };
 
 const User = model("user", userSchema);

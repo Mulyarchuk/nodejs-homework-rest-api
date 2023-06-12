@@ -20,4 +20,8 @@ router.post("/logout", authenticate, ctrl.logout);
 
 router.patch("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar);
 
+router.get("/verify/:verificationCode", ctrl.verify);
+
+router.post("/verify", validateBody(schemas.emailSchema), ctrl.resendVerifyEmail);
+
 module.exports = router;
